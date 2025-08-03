@@ -1331,6 +1331,7 @@ namespace NoteTweaks.UI
             NotifyPropertyChanged(nameof(BombMeshIsSphere));
             
             await NotePreviewViewController.RefreshEverything();
+            ReloadNoteTexture();
         }
     }
 }
