@@ -113,14 +113,16 @@ namespace NoteTweaks.Managers
         {
             "Aberration A", "Aberration B", "Aberration C", "Aberration D", "Aberration E", "Aberration F",
             "Aberration G", "Aberration H", "Aberration I", "Aberration J", "Aberration K",
+            "Burst A", "Burst B", "Burst C", "Burst D", "Burst E", "Burst F", "Burst G", 
             "Dimple A", "Dimple B", "Dimple C",
             "Flat", "Flat Black", "Flat Dark", "Flat Mid",
             "Kaleido A", "Kaleido B", "Kaleido C", "Kaleido D", "Kaleido E", "Kaleido F", "Kaleido G", "Kaleido H",
             "Multicolor A", "Multicolor B", "Multicolor C", "Multicolor D", "Multicolor E",
             "Noisy",
+            "Pixels A", "Pixels B", "Pixels C",
             "Radials A", "Radials B", "Radials C", "Radials D", "Radials E", "Radials F", "Radials G", "Radials H",
-            "Radials I", "Radials J", "Radials K", "Radials L", "Radials M", "Radials N", "Radials O", "Radials P",
-            "Ripple A", "Ripple B", "Ripple C",
+            "Radials I", "Radials J", "Radials K", "Radials L", "Radials M", "Radials N", "Radials O", "Radials P", "Radials Q",
+            "Ripple A", "Ripple B", "Ripple C", "Ripple D", "Ripple E", "Ripple F",
             "Soft Metallic A", "Soft Metallic B"
         };
         private static readonly int NoteCubeMapID = Shader.PropertyToID("_EnvironmentReflectionCube");
