@@ -161,14 +161,14 @@ namespace NoteTweaks.Patches
             internal class MultiplayerLevelScenesTransitionSetupDataPatch
             {
                 [UsedImplicitly]
-                [HarmonyPatch(typeof(MultiplayerLevelScenesTransitionSetupDataSO), "Init")]
+                [HarmonyPatch(typeof(MultiplayerLevelScenesTransitionSetupDataSO), nameof(MultiplayerLevelScenesTransitionSetupDataSO.Init))]
                 // ReSharper disable once InconsistentNaming
                 internal static void Postfix(MultiplayerLevelScenesTransitionSetupDataSO __instance, in GameplayModifiers gameplayModifiers)
                 {
                     PostfixCall(__instance.beatmapKey, gameplayModifiers);
                 }
 
-                [HarmonyPatch(typeof(MultiplayerLevelScenesTransitionSetupDataSO), "Init")]
+                [HarmonyPatch(typeof(MultiplayerLevelScenesTransitionSetupDataSO), nameof(MultiplayerLevelScenesTransitionSetupDataSO.Init))]
                 // ReSharper disable once InconsistentNaming
                 internal static bool Prefix()
                 {
@@ -177,7 +177,7 @@ namespace NoteTweaks.Patches
             }
         }
 
-        [HarmonyPatch(typeof(BurstSliderGameNoteController), "Init")]
+        [HarmonyPatch(typeof(BurstSliderGameNoteController), nameof(BurstSliderGameNoteController.Init))]
         internal class BurstSliderPatch
         {
             [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -291,7 +291,7 @@ namespace NoteTweaks.Patches
             }
         }
         
-        [HarmonyPatch(typeof(GameNoteController), "Init")]
+        [HarmonyPatch(typeof(GameNoteController), nameof(GameNoteController.Init))]
         internal class NotePatch
         {
             [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -525,7 +525,7 @@ namespace NoteTweaks.Patches
             
             // this fixes debris meshes in BeatLeader replays specifically...
             // (this is never called in normal gameplay)
-            [HarmonyPatch(typeof(ScoreController), "HandleNoteWasCut")]
+            [HarmonyPatch(typeof(ScoreController), nameof(ScoreController.HandleNoteWasCut))]
             [HarmonyPrefix]
             internal static void SetLastDirectionScoreController(NoteController noteController)
             {
@@ -534,7 +534,7 @@ namespace NoteTweaks.Patches
             
             // ...and this fixes it in normal gameplay
             // (this is never called in BeatLeader replays)
-            [HarmonyPatch(typeof(NoteController), "SendNoteWasCutEvent")]
+            [HarmonyPatch(typeof(NoteController), nameof(NoteController.SendNoteWasCutEvent))]
             [HarmonyPrefix]
             internal static void SetLastDirectionNoteController(NoteController __instance)
             {
@@ -542,7 +542,7 @@ namespace NoteTweaks.Patches
             }
         }
 
-        [HarmonyPatch(typeof(NoteDebris), "Init")]
+        [HarmonyPatch(typeof(NoteDebris), nameof(NoteDebris.Init))]
         internal class DebrisPatch
         {
             // ReSharper disable once InconsistentNaming
@@ -570,7 +570,7 @@ namespace NoteTweaks.Patches
             }
         }
 
-        [HarmonyPatch(typeof(ColorNoteVisuals), "HandleNoteControllerDidInit")]
+        [HarmonyPatch(typeof(ColorNoteVisuals), nameof(ColorNoteVisuals.HandleNoteControllerDidInit))]
         [HarmonyAfter("aeroluna.Chroma")]
         [HarmonyPriority(int.MinValue)]
         internal class NoteArrowPatch
@@ -1009,7 +1009,7 @@ namespace NoteTweaks.Patches
             }
 
             [UsedImplicitly]
-            [HarmonyPatch(typeof(MaterialPropertyBlockController), "ApplyChanges")]
+            [HarmonyPatch(typeof(MaterialPropertyBlockController), nameof(MaterialPropertyBlockController.ApplyChanges))]
             [HarmonyPrefix]
             // ReSharper disable once InconsistentNaming
             private static bool DoPatching(MaterialPropertyBlockController __instance)

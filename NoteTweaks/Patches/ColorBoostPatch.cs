@@ -60,7 +60,6 @@ namespace NoteTweaks.Patches
         }
         
         [HarmonyPatch(typeof(ColorSchemeExtensions), nameof(ColorSchemeExtensions.ResolveColorScheme))]
-        //[HarmonyPatch(typeof(StandardLevelScenesTransitionSetupDataSO), "InitColorInfo")]
         [HarmonyPriority(Priority.LowerThanNormal)]
         [HarmonyPostfix]
         // ReSharper disable once InconsistentNaming
@@ -79,7 +78,7 @@ namespace NoteTweaks.Patches
             __result = PatchColors(schemeObj);
         }
 
-        [HarmonyPatch(typeof(StandardLevelRestartController), "RestartLevel")]
+        [HarmonyPatch(typeof(StandardLevelRestartController), nameof(StandardLevelRestartController.RestartLevel))]
         [HarmonyPostfix]
         [HarmonyPriority(Priority.LowerThanNormal)]
         // ReSharper disable once InconsistentNaming

@@ -18,7 +18,7 @@ namespace NoteTweaks.Patches
             Materials.BombMaterial.SetColor(Color0, staticBombColor);
         }
         
-        [HarmonyPatch(typeof(BombNoteController), "Init")]
+        [HarmonyPatch(typeof(BombNoteController), nameof(BombNoteController.Init))]
         [HarmonyPriority(int.MaxValue)]
         [HarmonyAfter("aeroluna.Chroma")]
         [HarmonyPostfix]
@@ -85,7 +85,7 @@ namespace NoteTweaks.Patches
             }
         }
         
-        [HarmonyPatch(typeof(BeatmapObjectsInstaller), "InstallBindings")]
+        [HarmonyPatch(typeof(BeatmapObjectsInstaller), nameof(BeatmapObjectsInstaller.InstallBindings))]
         [HarmonyPriority(int.MaxValue)]
         [HarmonyPostfix]
         // ReSharper disable once InconsistentNaming
