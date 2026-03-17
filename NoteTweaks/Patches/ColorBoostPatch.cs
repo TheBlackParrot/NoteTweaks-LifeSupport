@@ -59,48 +59,24 @@ namespace NoteTweaks.Patches
             return PatchedScheme;
         }
         
-        [HarmonyPatch(typeof(StandardLevelScenesTransitionSetupDataSO), "InitColorInfo")]
+        [HarmonyPatch(typeof(ColorSchemeExtensions), nameof(ColorSchemeExtensions.ResolveColorScheme))]
+        //[HarmonyPatch(typeof(StandardLevelScenesTransitionSetupDataSO), "InitColorInfo")]
         [HarmonyPriority(Priority.LowerThanNormal)]
         [HarmonyPostfix]
         // ReSharper disable once InconsistentNaming
-        private static void InitColorInfoPatch(StandardLevelScenesTransitionSetupDataSO __instance)
+        private static void InitColorInfoPatch(ref ColorScheme __result)
         {
             if (!Config.Enabled || NotePhysicalTweaks.AutoDisable)
             {
                 return;
             }
 
-            PrePatchedScheme = __instance.colorScheme;
+            PrePatchedScheme = __result;
             
             ColorSchemeSO schemeObj = ScriptableObject.CreateInstance<ColorSchemeSO>();
-            schemeObj._colorScheme = __instance.colorScheme;
+            schemeObj._colorScheme = __result;
 
-            ColorScheme patchedColors = PatchColors(schemeObj);
-
-            __instance.usingOverrideColorScheme = true;
-            __instance.colorScheme = patchedColors;
-        }
-        
-        [HarmonyPatch(typeof(MultiplayerLevelScenesTransitionSetupDataSO), "InitColorInfo")]
-        [HarmonyPriority(Priority.LowerThanNormal)]
-        [HarmonyPostfix]
-        // ReSharper disable once InconsistentNaming
-        private static void InitColorInfoPatchMultiplayer(MultiplayerLevelScenesTransitionSetupDataSO __instance)
-        {
-            if (!Config.Enabled || NotePhysicalTweaks.AutoDisable)
-            {
-                return;
-            }
-            
-            PrePatchedScheme = __instance.colorScheme;
-            
-            ColorSchemeSO schemeObj = ScriptableObject.CreateInstance<ColorSchemeSO>();
-            schemeObj._colorScheme = __instance.colorScheme;
-
-            ColorScheme patchedColors = PatchColors(schemeObj);
-
-            __instance.usingOverrideColorScheme = true;
-            __instance.colorScheme = patchedColors;
+            __result = PatchColors(schemeObj);
         }
 
         [HarmonyPatch(typeof(StandardLevelRestartController), "RestartLevel")]

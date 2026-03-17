@@ -142,8 +142,7 @@ namespace NoteTweaks.Patches
                 [UsedImplicitly]
                 private static MethodInfo TargetMethod() => AccessTools.FirstMethod(
                     typeof(StandardLevelScenesTransitionSetupDataSO),
-                    m => m.Name == nameof(StandardLevelScenesTransitionSetupDataSO.Init) &&
-                         m.GetParameters().All(p => p.ParameterType != typeof(IBeatmapLevelData)));
+                    m => m.Name == nameof(StandardLevelScenesTransitionSetupDataSO.Init));
 
                 // ReSharper disable once InconsistentNaming
                 internal static void Postfix(StandardLevelScenesTransitionSetupDataSO __instance, in GameplayModifiers gameplayModifiers)
