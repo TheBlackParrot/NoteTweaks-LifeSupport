@@ -91,7 +91,7 @@ namespace NoteTweaks.UI
         [UIAction("openNewReleaseTag")]
         private void OpenNewReleaseTag()
         {
-            Application.OpenURL($"https://github.com/TheBlackParrot/NoteTweaks/releases/tag/{VersionManager.LatestVersion.ToString(3)}");
+            Application.OpenURL($"{VersionData.Manifest.Links.ProjectHome}/releases/tag/{VersionManager.LatestVersion.ToString(3)}");
         }
 
         private const BindingFlags BindingFlags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;

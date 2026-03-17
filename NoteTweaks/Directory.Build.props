@@ -21,8 +21,8 @@
     <Authors>TheBlackParrot</Authors>
     <Version>0.10.3+$(GameVersion)</Version>
     <Description>Change various aspects of the default note</Description>
-    <ProjectHome>https://github.com/TheBlackParrot/NoteTweaks</ProjectHome>
-    <ProjectSource>https://github.com/TheBlackParrot/NoteTweaks</ProjectSource>
+    <ProjectHome>https://github.com/TheBlackParrot/NoteTweaks-LifeSupport</ProjectHome>
+    <ProjectSource>https://github.com/TheBlackParrot/NoteTweaks-LifeSupport</ProjectSource>
     <DonateUrl>https://ko-fi.com/septilateral</DonateUrl>
   </PropertyGroup>
 
