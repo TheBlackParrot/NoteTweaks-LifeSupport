@@ -13,6 +13,7 @@ using NoteTweaks.Patches;
 using NoteTweaks.Utils;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 namespace NoteTweaks.UI
 {
@@ -1282,94 +1283,19 @@ namespace NoteTweaks.UI
             
             NoteContainer.transform.position = _initialPosition;
 
-            Task.Run(async () =>
-            {
-                try
-                {
-                    BeatmapObjectsInstaller beatmapObjectsInstaller =
-                        Resources.FindObjectsOfTypeAll<BeatmapObjectsInstaller>().FirstOrDefault();
-
-                    if (beatmapObjectsInstaller == null)
-                    {
-                        return;
-                    }
-
-                    GameNoteController notePrefab = beatmapObjectsInstaller._normalBasicNotePrefab;
-                    GameNoteController chainHeadPrefab = beatmapObjectsInstaller._burstSliderHeadNotePrefab;
-                    BombNoteController bombPrefab = beatmapObjectsInstaller._bombNotePrefab;
-                    BurstSliderGameNoteController chainPrefab = beatmapObjectsInstaller._burstSliderNotePrefab;
-                    // ReSharper restore PossibleNullReferenceException
-
-                    SettingsViewController.LoadTextures = true;
-                    await Materials.UpdateAll();
-
-                    List<string> noteNames = new List<string> { "L_Arrow", "R_Arrow", "L_Dot", "R_Dot" };
-                    for (int i = 0; i < noteNames.Count; i++)
-                    {
-                        CreateNote(notePrefab, noteNames[i], i);
-                    }
-
-                    List<string> chainHeadNames = new List<string> { "L_ChainHead", "R_ChainHead" };
-                    for (int i = 0; i < chainHeadNames.Count; i++)
-                    {
-                        CreateChainHeadNote(chainHeadPrefab, chainHeadNames[i], i);
-                    }
-
-                    List<string> chainNames = new List<string> { "L_Chain", "R_Chain" };
-                    for (int j = 0; j < 4; j++)
-                    {
-                        for (int i = 0; i < chainNames.Count; i++)
-                        {
-                            CreateChainNote(chainPrefab, chainNames[i], i, j);
-                        }
-                    }
-
-                    for (int i = 0; i < 3; i++)
-                    {
-                        CreateBomb(bombPrefab, i.ToString(), i);
-                    }
-
-                    UpdateAccDots();
-                    UpdateColors();
-                    UpdateBombColors();
-                    UpdateBombScale();
-                    UpdateNoteScale();
-                    UpdateArrowMeshes();
-                    UpdateArrowPosition();
-                    UpdateArrowScale();
-                    UpdateDotMesh();
-                    UpdateDotPosition();
-                    UpdateDotScale();
-                    UpdateDotRotation();
-                    UpdateOutlines();
-                    UpdateVisibility();
-                    UpdateBombMeshes();
-
-                    NoteContainer.SetActive(true);
-
-                    HasInitialized = true;
-
-                    await CutoutFadeIn();
-                }
-                catch (Exception e)
-                {
-                    Plugin.Log.Error(e);
-                }
-            });
-
-            // ReSharper disable PossibleNullReferenceException
-            //MenuTransitionsHelper menuTransitionsHelper = Resources.FindObjectsOfTypeAll<MenuTransitionsHelper>().FirstOrDefault();
-            //StandardLevelScenesTransitionSetupDataSO standardLevelScenesTransitionSetupData = menuTransitionsHelper.standardLevelScenesTransitionSetupData;
-            /*SceneInfo gameCoreSceneInfo = standardLevelScenesTransitionSetupData._gameCoreSceneInfo;
-            SceneInfo standardGameplaySceneInfo = standardLevelScenesTransitionSetupData._standardGameplaySceneInfo;*/
-
-            /*UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(gameCoreSceneInfo.sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive).completed +=
+            // ReSharper disable once PossibleNullReferenceException
+            SceneManager.LoadSceneAsync("GameCore", LoadSceneMode.Additive).completed +=
                 operation1 =>
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(standardGameplaySceneInfo.sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive).completed +=
+                    // ReSharper disable once PossibleNullReferenceException
+                    SceneManager.LoadSceneAsync("StandardGameplay", LoadSceneMode.Additive).completed +=
                         async operation2 =>
                         {
                             BeatmapObjectsInstaller beatmapObjectsInstaller = Resources.FindObjectsOfTypeAll<BeatmapObjectsInstaller>().FirstOrDefault();
+                            if (beatmapObjectsInstaller == null)
+                            {
+                                return;
+                            }
 
                             GameNoteController notePrefab = beatmapObjectsInstaller._normalBasicNotePrefab;
                             GameNoteController chainHeadPrefab = beatmapObjectsInstaller._burstSliderHeadNotePrefab;
@@ -1428,10 +1354,10 @@ namespace NoteTweaks.UI
 
                             await CutoutFadeIn();
 
-                            UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(standardGameplaySceneInfo.sceneName);
-                            UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(gameCoreSceneInfo.sceneName);
+                            await SceneManager.UnloadSceneAsync("StandardGameplay");
+                            await SceneManager.UnloadSceneAsync("GameCore");
                         };
-                };*/
+                };
         }
     }
 }
