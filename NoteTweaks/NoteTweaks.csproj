@@ -12,7 +12,7 @@
         <Product>NoteTweaks</Product>
         <Copyright>Copyright © TheBlackParrot</Copyright>
         <BSMTProjectType>BSIPA</BSMTProjectType>
-        <Configurations>Debug-1.42.2;Release-1.42.2</Configurations>
+        <Configurations>Release-1.43.0;Debug-1.43.0</Configurations>
         <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
     <PropertyGroup>
